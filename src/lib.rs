@@ -50,6 +50,13 @@ mod eff {
   /// A generic definition of state machines. Note that the associated types `Message` and
   /// `Command` should ideally be associated with one another: `Commands` would be generic over the
   /// messages they produce, where that type parameter is "filled in" by this trait.
+  ///
+  /// I have (@dadleyy) tried exploring this in my "costanza" application that can be found here:
+  /// https://github.com/dadleyy/costanza/blob/main/src/costanza-mid/src/eff.rs
+  ///
+  /// It is also worth nothing that the `iced` project has done a really good job so far with these
+  /// concepts too:
+  /// https://github.com/iced-rs/iced
   pub trait StateMachine {
     /// The kinds of things that our state machine needs to be initialized with.
     type Flags;
