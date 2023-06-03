@@ -1,0 +1,26 @@
+name: test
+on:
+  push:
+    branches:
+      - "*"
+    tags:
+      - "v*"
+jobs:
+  test-and-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "set output: short_sha"
+        id: vars
+        run: |
+          echo "SHORT_SHA=$(echo $GITHUB_SHA | head -c 7)">>$GITHUB_OUTPUT
+      - name: "(test) install clippy"
+        run: rustup component add clippy
+      - name: "(test) build"
+        run: cargo build
+      - name: "(test) clippy"
+        run: cargo clippy
+      - name: "(test) test"
+        run: cargo test
+      - name: "(test) doc"
+        run: cargo doc
